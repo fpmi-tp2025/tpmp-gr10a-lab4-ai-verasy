@@ -69,19 +69,6 @@
         <mxCell id="qddge7Fq89VXhhM6PJzp-16" value="Интерфейс хранения данных" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="-58" y="158" width="110" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="qddge7Fq89VXhhM6PJzp-17" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=halfCircle;endFill=0;endSize=6;strokeWidth=1;sketch=0;fontSize=12;curved=1;" edge="1" target="qddge7Fq89VXhhM6PJzp-19" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="232" y="200" as="sourcePoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="qddge7Fq89VXhhM6PJzp-18" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=oval;endFill=0;sketch=0;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;endSize=10;fontSize=12;curved=1;exitX=0;exitY=1;exitDx=0;exitDy=0;" edge="1" target="qddge7Fq89VXhhM6PJzp-19" parent="1" source="qddge7Fq89VXhhM6PJzp-3">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="192" y="200" as="sourcePoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="qddge7Fq89VXhhM6PJzp-19" value="" style="ellipse;whiteSpace=wrap;html=1;align=center;aspect=fixed;fillColor=none;strokeColor=none;resizable=0;perimeter=centerPerimeter;rotatable=0;allowArrows=0;points=[];outlineConnect=1;" vertex="1" parent="1">
-          <mxGeometry x="207" y="195" width="10" height="10" as="geometry" />
-        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
