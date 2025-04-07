@@ -12,6 +12,6 @@ find_package(SQLite3 REQUIRED)
 add_library(database_lib src/database.c)
 target_link_libraries(database_lib SQLite::SQLite3)
 
-# Тесты
+# Включение тестов
 enable_testing()
 add_subdirectory(tests)
