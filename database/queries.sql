@@ -1,3 +1,5 @@
+-- 1. Проверка существования таблиц
+SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;
 -- 1. Звероферма с самой высокой ценой
 SELECT f.* 
 FROM farms f
