@@ -6,18 +6,25 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
-# Явно указываем исходные файлы для тестового исполняемого файла
+# Создаем отдельную библиотеку для database.c
+add_library(database_objects OBJECT ../src/database.c)
+target_include_directories(database_objects PRIVATE ../includes)
+
+# Основной тестовый исполняемый файл
 add_executable(test_database 
     test_database.cpp
-    ../src/database.c  # Добавляем исходный файл с реализациями
+    $<TARGET_OBJECTS:database_objects>
 )
 
+# Настройки линковки
 target_link_libraries(test_database
+    PRIVATE
     SQLite::SQLite3
     Catch2::Catch2WithMain
 )
 
-# Добавляем include-директории
-target_include_directories(test_database PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/../includes
+# Отключаем coverage для Catch2
+set_target_properties(Catch2 Catch2WithMain PROPERTIES 
+    COMPILE_FLAGS ""
+    LINK_FLAGS ""
 )
