@@ -1,4 +1,3 @@
-# Скачиваем Catch2 автоматически
 include(FetchContent)
 FetchContent_Declare(
   Catch2
@@ -7,9 +6,18 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(test_database test_database.cpp)
+# Явно указываем исходные файлы для тестового исполняемого файла
+add_executable(test_database 
+    test_database.cpp
+    ../src/database.c  # Добавляем исходный файл с реализациями
+)
+
 target_link_libraries(test_database
-    database_lib
     SQLite::SQLite3
-    Catch2::Catch2WithMain  # Автоматически подключит заголовки
+    Catch2::Catch2WithMain
+)
+
+# Добавляем include-директории
+target_include_directories(test_database PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../includes
 )
