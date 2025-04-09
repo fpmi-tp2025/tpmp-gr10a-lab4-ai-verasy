@@ -1,6 +1,6 @@
 
 #define CATCH_CONFIG_MAIN
-#include "Catch2/catch_all.hpp"
+#include "Catch2/src/catch2/catch_all.hpp"
 #include "../../includes/database.h"
 
 TEST_CASE("Database connection", "[db]") {
