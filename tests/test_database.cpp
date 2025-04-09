@@ -1,7 +1,7 @@
 
 #define CATCH_CONFIG_MAIN
 #include "catch2/catch_all.hpp"
-#include "../../includes/database.h"
+#include "../includes/database.h"
 
 TEST_CASE("Database connection", "[db]") {
     sqlite3* db = db_connect();
