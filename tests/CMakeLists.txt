@@ -1,3 +1,4 @@
+# Автоматическая загрузка Catch2
 include(FetchContent)
 FetchContent_Declare(
   Catch2
@@ -6,12 +7,12 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
-# Создаем отдельную библиотеку для database.c
+# Объекты для тестов
 add_library(database_objects OBJECT ../src/database.c)
 target_include_directories(database_objects PRIVATE ../includes)
 
-# Основной тестовый исполняемый файл
-add_executable(test_database 
+# Исполняемый файл тестов
+add_executable(test_database
     test_database.cpp
     $<TARGET_OBJECTS:database_objects>
 )
@@ -21,10 +22,8 @@ target_link_libraries(test_database
     PRIVATE
     SQLite::SQLite3
     Catch2::Catch2WithMain
+    gcov  # Важно: добавляем gcov явно
 )
 
-# Отключаем coverage для Catch2
-set_target_properties(Catch2 Catch2WithMain PROPERTIES 
-    COMPILE_FLAGS ""
-    LINK_FLAGS ""
-)
+# Добавляем тест в CTest
+add_test(NAME database_tests COMMAND test_database)
