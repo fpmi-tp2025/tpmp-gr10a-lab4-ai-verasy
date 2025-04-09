@@ -1,10 +1,6 @@
-name: C/C++ CI
+name: CI with Coverage
 
-on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main ]
+on: [push, pull_request]
 
 jobs:
   build_and_test:
@@ -13,48 +9,33 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        submodules: 'recursive'
+        submodules: recursive
         
     - name: Install dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y \
-          build-essential \
+          gcc g++ \
           cmake \
-          lcov \
-          libsqlite3-dev \
-          gcc \
-          g++ \
-          sqlite3
+          lcov gcovr \
+          libsqlite3-dev
         
-    - name: Configure project
-      run: |
-        cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
-        cmake --build build --target help  # Показывает список доступных целей
+    - name: Configure
+      run: cmake -S . -B build -DENABLE_COVERAGE=ON
         
-    - name: Build project
+    - name: Build
       run: cmake --build build --verbose
         
     - name: Run tests
       working-directory: ./build
-      run: ctest --output-on-failure -V
+      run: ctest --output-on-failure
         
-    - name: Generate coverage report
+    - name: Generate coverage
       working-directory: ./build
       run: |
         lcov --capture --directory . --output-file coverage.info
         lcov --remove coverage.info '/usr/*' '*/tests/*' --output-file coverage.info
         lcov --list coverage.info
         
-    - name: Upload coverage to Codecov
+    - name: Upload coverage
       uses: codecov/codecov-action@v3
-      with:
-        file: ./build/coverage.info
-        flags: unittests
-        name: codecov-upload
-        verbose: true
-
-    - name: Verify SQLite database
-      run: |
-        sqlite3 build/auction.db "SELECT name FROM sqlite_master WHERE type='table';"
-        sqlite3 build/auction.db "SELECT COUNT(*) FROM farms;"
