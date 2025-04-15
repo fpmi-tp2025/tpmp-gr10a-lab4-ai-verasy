@@ -3,19 +3,19 @@
 
 #include <sqlite3.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+// Подключение к БД
+sqlite3* db_connect();
 
-sqlite3* db_connect(void);
-void db_init(void);
+// Инициализация БД
+void db_init();
+
+// Выполнение запроса
 int db_execute_query(const char* query, 
                     int (*callback)(void*, int, char**, char**), 
                     void* data);
+
+// Закрытие соединения
 int db_close(sqlite3* db);
 
-#ifdef __cplusplus
-}
 #endif
 
-#endif // DATABASE_H
