@@ -1,4 +1,4 @@
-name: CI with Coverage
+name: CI Pipeline
 
 on: [push, pull_request]
 
@@ -7,24 +7,20 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
       with:
         submodules: recursive
         
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y \
-          gcc g++ \
-          cmake \
-          lcov gcovr \
-          libsqlite3-dev
+        sudo apt-get install -y gcc cmake lcov sqlite3 libsqlite3-dev
         
     - name: Configure
-      run: cmake -S . -B build -DENABLE_COVERAGE=ON
+      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
         
     - name: Build
-      run: cmake --build build --verbose
+      run: cmake --build build
         
     - name: Run tests
       working-directory: ./build
@@ -38,4 +34,4 @@ jobs:
         lcov --list coverage.info
         
     - name: Upload coverage
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v1
